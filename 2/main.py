@@ -46,12 +46,12 @@
 # print(separator([1,4,8,6,3,7,1]))
 
 #Task 6
-# def classificator(d):
-#     res = {}
-#     for i in d:
-#         res.update({type(d[i]).__name__: res.get(type(d[i]).__name__, 0) + 1} )
-#     return res
-# print(classificator({'a': 1, 3: [1,5], 'e': 'abc', '6': []}))
+def classificator(d):
+    res = {}
+    for i in d:
+        res[type(d[i]).__name__] = res.get(type(d[i]).__name__, 0) + 1
+    return res
+print(classificator({'a': 1, 3: [1,5], 'e': 'abc', '6': []}))
 
 #Task 8
 # def courtage(tup):
@@ -66,10 +66,10 @@
 # print(courtage((1,4,8,6,3,7,1)))
 
 #Task 9
-def list_of_list(lst):
-    res = []
-    for i in lst:
-        res += i
-
-    return res
-print(list_of_list([[1],[4,8],[6,3,7],[1,3]]))
+# def list_of_list(lst):
+#     res = []
+#     for i in lst:
+#         res += i
+#
+#     return res
+# print(list_of_list([[1],[4,8],[6,3,7],[1,3]]))
