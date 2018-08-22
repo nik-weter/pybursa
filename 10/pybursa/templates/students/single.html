@@ -1,0 +1,17 @@
+{% extends "students/base.html" %}
+
+{% block content %}
+
+      <div class="starter-template">
+        <h1>Student {{ student.surname }} {{ student.name }}</h1>
+        <ul class="list-group">
+            <li class="list-group-item">Date of birth: {{ student.date_of_birth }}</li>
+            <li class="list-group-item">Phone: {{ student.phone }}</li>
+            <li class="list-group-item">Email: {{ student.email }}</li>
+            <li class="list-group-item">Package: {{ student.package }}</li>
+        </ul>
+      <a href="{% url 'students:student_edit' student.id %}">Edit</a>
+      <a href="{% url 'students:student_delete' student.id %}">Delete</a>
+      </div>
+
+{% endblock content %}

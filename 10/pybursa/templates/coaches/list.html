@@ -1,0 +1,15 @@
+{% extends "coaches/base.html" %}
+
+{% block content %}
+
+      <div class="starter-template">
+        <h1>Coaches list</h1>
+        <ol class="list-group">
+        {% for coache in coaches %}
+            <li class="list-group-item"><a href="{% url 'coaches:list' %}{{ coache.id }}">{{ coache.surname }}{{ coache.name }}</a> <a href="{% url 'coaches:coache_edit' coache.id %}">  Edit</a><a href="{% url 'coaches:coache_delete' coache.id %}">  Delete</a></li>
+        {% endfor %}
+        </ol>
+      <a href="{% url 'coaches:coache_add' %}">  Add</a>
+      </div>
+
+{% endblock content %}

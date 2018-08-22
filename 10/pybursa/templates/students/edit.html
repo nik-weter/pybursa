@@ -1,0 +1,14 @@
+{% extends "students/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1>Edit for student {{ student.surname }} {{ student.name }}</h1>
+        <form method='post'>
+            {% csrf_token %}
+            {% for field in form %}
+                <p>{{ field.name|capfirst }}: {{ field }}</p>
+            {% endfor %}
+            <input type='submit' />
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "students/base.html" %}
+
+{% block content %}
+
+      <div class="starter-template">
+        <h1>Students list</h1>
+        <ul class="list-group">
+        {% for student in students %}
+            <li class="list-group-item"><a href="{% url 'students:list' %}{{ student.id }}">{{ student.surname }}{{ student.name }}</a> <a href="{% url 'students:student_edit' student.id %}">  Edit</a> <a href="{% url 'students:student_delete' student.id %}">  Delete</a></li>
+        {% endfor %}
+        </ul>
+      <a href="{% url 'students:student_add'%}">  Add new student</a
+      </div>
+
+{% endblock content %}

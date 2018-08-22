@@ -1,0 +1,23 @@
+{% extends "coaches/base.html" %}
+
+{% block content %}
+      <div class="starter-template">
+        <h1>Coache {{ coache.surname }} {{ coache.name }}</h1>
+        <ul class="list-group">
+            <li class="list-group-item">Email: {{ coache.email }}</li>
+            <li class="list-group-item">Role: {{ coache.get_role_display }}</li>
+            {% if coache.course_set.all %}
+            <li class="list-group-item">Teacher for courses: {% for course in coache.course_set.all %}
+                            {{ course.name }}<br>
+            {% endfor %}</li>
+            {% endif %}
+            {% if coache.course_assistant.all %}
+            <li class="list-group-item">Assistent for courses: {% for course in coache.course_assistant.all %}
+                            {{ course.name }}<br>
+            {% endfor %}</li>
+            {% endif %}
+        </ul>
+      <a href="{% url 'coaches:coache_edit' coache.id %}">  Edit</a>
+      </div>
+
+{% endblock content %}
