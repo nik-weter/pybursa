@@ -16,3 +16,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 admin.site.site_header = 'PyBursa administration'
+
+from django.conf import settings
+
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]

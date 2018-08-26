@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect
+from django.views.generic.edit import FormView
+
 from .models import *
-from .forms import StudentForm
+from .forms import StudentForm, MailCustomForm
+from coaches.models import Coache
+
+
+
 
 # Create your views here.
 def students_list(request):
@@ -45,3 +51,39 @@ def student_delete(request, student_id):
     Student.objects.get(id=student_id).delete()
 
     return redirect('students:list')
+
+class MailView(FormView):
+    template_name = 'students/email.html'
+    form_class = MailCustomForm
+    success_url = '/students/send/'
+
+    # def form_valid(self, form):
+    #     message = "{name} / {email} said: ".format(
+    #         name=form.cleaned_data.get('name'),
+    #         email=form.cleaned_data.get('email'))
+    #     message += "\n\n{0}".format(form.cleaned_data.get('message'))
+    #     send_mail(
+    #         subject=form.cleaned_data.get('subject').strip(),
+    #         message=message,
+    #         from_email='contact-form@myapp.com',
+    #         recipient_list=[settings.LIST_OF_EMAIL_RECIPIENTS],
+    #     )
+    #     return super(MailView, self).form_valid(form)
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        subject = form.cleaned_data['theme']
+        coach = form.cleaned_data['coach']
+        goal = form.cleaned_data['goal']
+        text = form.cleaned_data['text']
+        messege = 'Достопочтенный и многоуважаемый {}!' \
+                  'Спешу уведомить Вас о неподобающем поведении студента {}. Дело в следующем.' \
+                  '{}. С уважением, один из Ваших студентов'.format(coach, goal, text)
+        form.send_email(
+            subject = subject,
+            message = messege,
+            from_email = form.cleaned_data['email'],
+            address = coach
+        )
+        #form.send_email()
+        return super(MailView, self).form_valid(form)
+
